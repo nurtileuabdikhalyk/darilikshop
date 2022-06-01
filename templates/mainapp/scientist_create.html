@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+
+
+</head>
+<body>
+{% block content %}
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div class="main-site-warp">
+    {% block sidebar %}
+    {% include 'include/sidebar.html' %}
+    {% endblock sidebar %}
+
+    <div class="site-content-warp">
+        {% block left_side %}
+        {% include 'include/left_side.html' %}
+        {% endblock left_side %}
+        <div class="page-section about-page">
+            <div class="about-section" style="margin-left:30px;">
+                {% autoescape off %}
+                <div class="col-xl-6">
+                    <div class="contact-text-warp">
+                        <div class="contact-text">
+                            <h2>Ғалым </h2>
+                            <!--                                <p>Біз сізге дәрішөптер туралы ақпарат алуға, оларды өңдеуге және мәліметтер қорына қосуға көсектесеміз.</p>-->
+                        </div>
+                        <form action="{% url 'scientist-create' %}" class="contact-form" method="post">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    {{ form.name }}
+                                </div>
+                                <div class="col-lg-6">
+                                    {{ form.surname }}
+                                </div>
+                                <div class="col-lg-12">
+                                    {{ form.lauazym }}
+                                </div>
+                                <div class="col-lg-12">
+                                    {{ form.ainalasu_salasy }}
+                                </div>
+                                <div class="col-lg-12">
+                                    {{ form.slug }}
+                                </div>
+                                <div class="col-lg-12">
+                                    {{ form.dariler }}
+                                    <br>
+                                </div>
+
+                                <div class="col-lg-12">
+                                    {{ form.image }}
+                                    <button type="submit" class="site-btn">Жіберу <img
+                                            src="{% static 'img/arrow-right.png' %}" alt="">
+                                    </button>
+                                </div>
+
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                {% endautoescape %}
+            </div>
+        </div>
+    </div>
+    <br>
+    <br>
+</div>
+
+{% endblock content %}
+</body>
+</html>

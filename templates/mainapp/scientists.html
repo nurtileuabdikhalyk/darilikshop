@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+
+
+</head>
+<body>
+{% block content %}
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div class="main-site-warp">
+    {% block sidebar %}
+    {% include 'include/sidebar.html' %}
+    {% endblock sidebar %}
+
+    <div class="site-content-warp">
+        {% block left_side %}
+        {% include 'include/left_side.html' %}
+        {% endblock left_side %}
+        <div class="page-section about-page">
+            <div class="about-section" style="margin-left:30px;">
+
+                <div class="row m-0 milestones">
+                    <!--                    <div class="col-lg-3 col-sm-6 p-0">-->
+                    {% for scientist in scientists %}
+
+                    <div class="alert alert-secondary">
+                        <h3>{{ scientist.name }} {{ scientist.surname }}</h3>
+                        <!--                        <p>{{ dari.description|truncatechars:100 }}</p>-->
+                        <a href="{% url 'scientistsdetails' scientist.slug %}" class="btn btn-warning">
+                            Толығырақ...</a>
+
+                        {% if user.is_authenticated %}
+                        <a href="{% url 'scientists-update' scientist.slug %}"
+                           class="btn btn-info">Өңдеу</a>
+
+                        <a href="{% url 'scientists-delete' scientist.slug %}" class="btn btn-danger">Өшіру</a>
+                        <a href="{% url 'scientist-create' %}" class="btn btn-primary">Ғалымдар
+                            қосу</a>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                    <!--                    </div>-->
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+</body>
+</html>

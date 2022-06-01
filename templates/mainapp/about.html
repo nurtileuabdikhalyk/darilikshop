@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+
+
+</head>
+<body>
+{% block content %}
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Main section start -->
+<div class="main-site-warp">
+    {% block sidebar %}
+    {% include 'include/sidebar.html' %}
+    {% endblock sidebar %}
+
+    <div class="site-content-warp">
+        {% block left_side %}
+        {% include 'include/left_side.html' %}
+        {% endblock left_side %}
+        <!-- Page start -->
+        <div class="page-section about-page">
+            <div class="about-section" style="margin-left:30px;">
+                <div class="video-section set-bg" data-setbg="{% static 'img/about-bg.jpg' %}" style="width:663px;height:400px;">
+
+                </div>
+                <div class="row m-0 milestones">
+                    <div class="col-lg-3 col-sm-6 p-0">
+                        <div class="milestone">
+                            <h2>25</h2>
+                            <div class="milestone-info">
+                                <h5>жылдан аса тәжірибе</h5>
+<!--                                <p>Nature Photography</p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 p-0">
+                        <div class="milestone">
+                            <h2>16k</h2>
+                            <div class="milestone-info">
+                                <h5>аса зерттеулер</h5>
+<!--                                <p>зерттеулер</p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 p-0">
+                        <div class="milestone">
+                            <h2>59</h2>
+                            <div class="milestone-info">
+                                <h5>зерттеуші</h5>
+                                <h5>ғалымдар</h5>
+<!--                                <p>Happy Couples</p>-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 p-0">
+                        <div class="milestone">
+                            <h2>37k</h2>
+                            <div class="milestone-info">
+                                <h5>дәрілікшөптер</h5>
+<!--                                <p>Thank you</p>-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page end -->
+    </div>
+</div>
+
+{% endblock content %}
+</body>
+</html>

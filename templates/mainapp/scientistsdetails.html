@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+
+
+</head>
+<body>
+{% block content %}
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div class="main-site-warp">
+    {% block sidebar %}
+    {% include 'include/sidebar.html' %}
+    {% endblock sidebar %}
+
+    <div class="site-content-warp">
+        {% block left_side %}
+        {% include 'include/left_side.html' %}
+        {% endblock left_side %}
+        <h3 style="margin-left:30px;">{{ scientist.name }} {{ scientist.surname }}</h3>
+        <br>
+        {% if scientist.image %}
+        <img style="margin-left:30px;" src="{{ scientist.image.url }}"
+             height="400px" width="300px" alt="">
+        {% endif %}
+        <br>
+        <br>
+        <div style="margin-left:30px;">
+            <p><h4>Лауазымы: </h4>{{ scientist.lauazym }}<br><br>
+            <h4>Айналысу саласы: </h4>{{ scientist.ainalasu_salasy }}<br><br>
+            <h4>Зерттеген дәрілер: </h4>
+            {% for d in scientist.darishopter_set.all %}
+            <a href="{% url 'daridetails' d.slug %}"> {{ d.name }} <br></a>
+
+            {% endfor %}
+            <br>
+            {% if user.is_authenticated %}
+            <a href="{% url 'scientists-update' scientist.slug %}"
+               class="btn btn-info">Өңдеу</a>
+
+            <a href="{% url 'scientists-delete' scientist.slug %}" class="btn btn-danger">Өшіру</a>
+            <a href="{% url 'scientist-create' %}" class="btn btn-primary">Ғалымдар
+                қосу</a>
+            {% endif %}
+            <br>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+</body>
+</html>

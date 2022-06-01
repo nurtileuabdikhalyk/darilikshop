@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block title %}Тіркелу{% endblock %}
+
+{% block content %}
+<div class="main-site-warp">
+    {% block sidebar %}
+    {% include 'include/sidebar.html' %}
+    {% endblock sidebar %}
+
+    <div class="site-content-warp">
+        {% block left_side %}
+        {% include 'include/left_side.html' %}
+        {% endblock left_side %}
+        <div style="margin-left:50px;">
+        <h1>Тіркелу</h1>
+
+        <p>Жүйеге тіркелгенсізбе? <a href="{{ login_url }}">сілтеме</a> арқылы кіріңіз</p>
+
+        <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+            {% endif %}
+            <button type="submit">Тіркелу &raquo;</button>
+        </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

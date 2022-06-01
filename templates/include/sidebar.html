@@ -1,0 +1,25 @@
+{% load static %}
+<div class="site-menu-warp">
+    <div class="close-menu">x</div>
+    <!-- Main menu -->
+    <ul class="site-menu">
+        {% with request.resolver_match.url_name as url_name %}
+        <li><a href="{% url 'home' %}" class="{% if url_name == 'home' %}active{% endif %}">Басты бет</a></li>
+        <li><a href="{% url 'about' %}" class="{% if url_name == 'about' %}active{% endif %}">Біз туралы</a></li>
+        <li><a href="{% url 'contact' %}" class="{% if url_name == 'contact' %}active{% endif %}">Контактілер</a></li>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_logout' %}" class="{% if url_name == 'account_logout' %}active{% endif %}">Шығу</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}" class="{% if url_name == 'account_login' %}active{% endif %}">Кіру</a></li>
+        <li><a href="{% url 'account_signup' %}" class="{% if url_name == 'account_signup' %}active{% endif %}">Тіркелу</a></li>
+        {% endif %}
+
+        {% endwith %}
+    </ul>
+    <div class="menu-social">
+        <a href=""><i class="fa fa-whatsapp"></i></a>
+        <a href=""><i class="fa fa-facebook"></i></a>
+        <a href=""><i class="fa fa-twitter"></i></a>
+        <a href=""><i class="fa fa-instagram"></i></a>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+
+
+</head>
+<body>
+{% block content %}
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Main section start -->
+<div class="main-site-warp">
+    {% block sidebar %}
+    {% include 'include/sidebar.html' %}
+    {% endblock sidebar %}
+    <div class="site-content-warp">
+        {% block left_side %}
+        {% include 'include/left_side.html' %}
+        {% endblock left_side %}
+        <!-- Page start -->
+        <div class="page-section">
+            <div class="hero-section">
+                <div class="hero-scroll">
+                    <div class="hero-track">
+                        <a href="{% url 'scientists' %}">
+                            <div class="hs-item set-bg" style="margin-left:30px;"
+                                 data-setbg="{% static 'img/hero/scientist.jpg' %}">
+
+
+                            </div>
+                        </a>
+                        <a href="{% url 'dariler' %}">
+                            <div class="hs-item set-bg" data-setbg="{% static 'img/hero/darishop.jpg' %}">
+                                <div class="hs-info">
+
+
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page end -->
+    </div>
+
+</div>
+{% endblock content %}
+</body>
+</html>

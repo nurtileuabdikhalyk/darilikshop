@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+
+</head>
+<body>
+{% block content %}
+<!-- Page Preloder -->
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<!-- Main section start -->
+<div class="main-site-warp">
+    {% block sidebar %}
+    {% include 'include/sidebar.html' %}
+    {% endblock sidebar %}
+
+    <div class="site-content-warp">
+        {% block left_side %}
+        {% include 'include/left_side.html' %}
+        {% endblock left_side %}
+        <!-- Page start -->
+        <div class="page-section contact-page">
+            <div class="contact-section">
+                <div class="row" style="margin-left:50px;">
+                    <div class="col-xl-6">
+                        <div class="map">
+
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2907.247794266376!2d76.92039181486442!3d43.22526408801571!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38836f18bf548af5%3A0x4eb3eb5eaef8aa6!2z0JrQsNC30LDRhdGB0LrQuNC5INCd0LDRhtC40L7QvdCw0LvRjNC90YvQuSDQo9C90LjQstC10YDRgdC40YLQtdGCINC40LzQtdC90Lgg0JDQu9GMLdCk0LDRgNCw0LHQuA!5e0!3m2!1sru!2skz!4v1653377653297!5m2!1sru!2skz"
+                                    style="border:0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-xl-6">
+                        <div class="contact-text-warp">
+                            <div class="contact-text">
+                                <h2>Бізбен байланыс</h2>
+                                <p>Біз сізге дәрішөптер туралы ақпарат алуға, оларды өңдеуге және мәліметтер қорына қосуға көсектесеміз.</p>
+                            </div>
+                            <form action="{% url 'addreview' %}" class="contact-form" method="post">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-lg-6">
+                                        {{ form.name }}
+                                    </div>
+                                    <div class="col-lg-6">
+                                        {{ form.email }}
+                                    </div>
+                                    <div class="col-lg-12">
+                                        {{ form.title }}
+                                        {{ form.text }}
+                                        <button type="submit" class="site-btn">Жіберу <img
+                                                src="{% static 'img/arrow-right.png' %}" alt="">
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Page end -->
+    </div>
+</div>
+
+{% endblock content %}
+</body>
+</html>

@@ -1,0 +1,17 @@
+{% load static %}
+
+<header class="header-section">
+    <div class="nav-switch">
+        <i class="fa fa-bars"></i>
+    </div>
+    <div class="header-social">
+        {% if user.is_authenticated %}
+        <i class="fa fa-user-circle-o"></i>{{ user.username }}
+        <a href="{% url 'account_logout' %}"><i class="fa fa-sign-out"></i> Шығу</a>
+        {% else %}
+        <a href="{% url 'account_login' %}"><i class="fa fa-user-plus"></i> Кіру</a>
+        <a href="{% url 'account_signup' %}"><i class="fa fa-sign-in"></i> Тіркелу</a>
+        {% endif %}
+
+    </div>
+</header>

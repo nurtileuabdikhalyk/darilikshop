@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    <title>{% block title %}{{ title }}{% endblock title %}</title>
+
+
+</head>
+<body>
+{% block content %}
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<div class="main-site-warp">
+    {% block sidebar %}
+    {% include 'include/sidebar.html' %}
+    {% endblock sidebar %}
+
+    <div class="site-content-warp">
+        {% block left_side %}
+        {% include 'include/left_side.html' %}
+        {% endblock left_side %}
+        {% autoescape off %}
+        <div class="page-section about-page">
+            <div class="about-section" style="margin-left:30px;">
+                <a href="{% url 'dariler' %}"> <img style="margin-left:30px;" src="{% static 'img/arrow-left.png' %}"
+                                                    height="15px" width="24px" alt=""></a>
+                <h3 style="margin-left:30px;">{{ dari.name }}</h3>
+                <br>
+                <div class="row">
+                    <div class="default-block detail-photos col-sm-6 col-xs-12">
+                        <div class="main-photo">
+
+                            {% if dari.image %}
+                            <img
+                                    src="{{ dari.image.url }}" style="weight:300px;height:250px; margin-left:30px;"
+                                    alt="" title="" data-pagespeed-url-hash="1829934111"
+                                    onload="pagespeed.CriticalImages.checkImageForCriticality(this);">
+                            {% endif %}
+                        </div>
+
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <article class="description"><p> {{ dari.anyqtama }}</article>
+                    </div>
+
+                </div>
+                <br>
+                <br>
+                <br>
+                <div id="accordion">
+                    <div class="card">
+                        <div class="btn btn-info" id="headingOne">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link" style="color:white;" data-toggle="collapse"
+                                        data-target="#collapseOne"
+                                        aria-expanded="true" aria-controls="collapseOne">
+                                    Сипаттамасы
+                                </button>
+                            </h5>
+                        </div>
+
+                        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                             data-parent="#accordion">
+                            <div class="card-body">
+                                {{ dari.description }}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="btn btn-info" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" style="color:white;" data-toggle="collapse"
+                                        data-target="#collapseTwo"
+                                        aria-expanded="false" aria-controls="collapseTwo">
+                                    Қолдануы
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+
+                                {{ dari.qoldanui }}
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="btn btn-info" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" style="color:white;" data-toggle="collapse"
+                                        data-target="#collapseThree" aria-expanded="false"
+                                        aria-controls="collapseThree">
+                                    Зерттеген ғалымдар
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+                             data-parent="#accordion">
+                            <div class="card-body">
+                                {% for s in dari.scientists.all %}
+                                <a href="{% url 'scientistsdetails' s.slug %}"> {{ s.name }} {{ s.surname }}<br></a>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="btn btn-info" id="headingFour">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" style="color:white;" data-toggle="collapse"
+                                        data-target="#collapseFour" aria-expanded="false"
+                                        aria-controls="collapseFour">
+                                    Таралуы
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseFour" class="collapse" aria-labelledby="headingFour"
+                             data-parent="#accordion">
+                            <div class="card-body">
+                                {{ dari.region.name }} облысы <br>
+                                {{ dari.region.district }} ауданы <br>
+                                {% if dari.region.tau_aty %}
+                                {{ dari.region.tau_aty }} тауы
+                                {% endif %}
+                            </div>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+
+                    </div>
+                    {% if user.is_authenticated %}
+                    <a href="{% url 'dariler-update' dari.slug %}"
+                       class="btn btn-info">Өңдеу</a>
+
+                    <a href="{% url 'dariler-delete' dari.slug %}" class="btn btn-danger">Өшіру</a>
+                    <a href="{% url 'dari-create' %}" class="btn btn-primary">Дәрішөп қосу</a>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+
+        {% endautoescape %}
+    </div>
+</div>
+
+{% endblock content %}
+</body>
+</html>
